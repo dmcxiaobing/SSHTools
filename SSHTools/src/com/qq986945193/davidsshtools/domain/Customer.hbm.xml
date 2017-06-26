@@ -9,7 +9,7 @@
 			column属性，是数据库表结构的字段名
 		 -->
 		<id name = "cust_id" column = "cust_id">
-			<!-- 主键的生成策略 -->
+			<!-- 主键的生成策略  使用hibernate框架 -->
 			<generator class="native"/>
 		</id>	
 		<!-- 配置其他的属性 -->
