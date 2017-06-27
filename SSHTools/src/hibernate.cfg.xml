@@ -26,6 +26,7 @@
 
 		<!-- 映射配置文件，需要引入映射的配置文件 -->
 		<mapping resource="com/qq986945193/davidsshtools/domain/Customer.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/User.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>
