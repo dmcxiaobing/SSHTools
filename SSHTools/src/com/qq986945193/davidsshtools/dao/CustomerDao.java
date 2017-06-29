@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.qq986945193.davidsshtools.domain.Customer;
@@ -32,7 +33,7 @@ public class CustomerDao {
 	/**
 	 * 查看 所有客户列表
 	 * 
-	 * @param custNameValue
+	 * @param custNameValue 筛选时用户输入的内容
 	 */
 	public List<Customer> catListCustomer(String custNameValue) {
 		// 获取session
