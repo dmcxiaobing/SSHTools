@@ -20,6 +20,48 @@ import com.qq986945193.davidsshtools.utils.HibernateUtils;
 /**
  * hibernate的一些查询操作
  */
+
+//Query执行HQL语句:
+	// 1.查询所有记录
+			/*Query query = session.createQuery("from Customer");
+			List<Customer> list = query.list();
+			System.out.println(list);*/
+			
+			// 2.条件查询:
+			/*Query query = session.createQuery("from Customer where name = ?");
+			query.setString(0, "李健");
+			List<Customer> list = query.list();
+			System.out.println(list);*/
+			
+			// 3.条件查询:
+			/*Query query = session.createQuery("from Customer where name = :aaa and age = :bbb");
+			query.setString("aaa", "李健");
+			query.setInteger("bbb", 38);
+			List<Customer> list = query.list();
+			System.out.println(list);*/
+			
+			// 4.分页查询:
+			/*Query query = session.createQuery("from Customer");
+			query.setFirstResult(3);
+			query.setMaxResults(3);
+			List<Customer> list = query.list();
+			System.out.println(list);*/
+//　基本查询
+/*SQLQuery sqlQuery = session.createSQLQuery("select * from cst_customer");
+List<Object[]> list = sqlQuery.list();
+
+for (Object[] objects : list) {
+	System.out.println(Arrays.toString(objects));
+}*/
+
+/*SQLQuery sqlQuery = session.createSQLQuery("select * from cst_customer");
+// 封装到对象中
+sqlQuery.addEntity(Customer.class);
+List<Customer> list = sqlQuery.list();
+
+for(Customer customer:list){
+	System.out.println(customer);
+}*/
 public class TestHibernateQuery {
 	/**
 	 * createQuery()得到集合
@@ -144,4 +186,6 @@ public class TestHibernateQuery {
 		transaction.commit();
 		session.close();
 	}
+	
+	
 }
