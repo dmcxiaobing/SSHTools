@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="false">
+	<class name="com.qq986945193.davidsshtools.domain.HibernateCustomer"
+		table="cst_hibernate_customer">
+		<id column="cust_id" name="cust_id">
+			<generator class="native" />
+		</id>
+		<property column="cust_name" generated="never" lazy="false"
+			name="cust_name" />
+		<property column="cust_user_id" generated="never" lazy="false"
+			name="cust_user_id" />
+		<property column="cust_create_id" generated="never" lazy="false"
+			name="cust_create_id" />
+		<property column="cust_source" generated="never" lazy="false"
+			name="cust_source" />
+		<property column="cust_industry" generated="never" lazy="false"
+			name="cust_industry" />
+		<property column="cust_level" generated="never" lazy="false"
+			name="cust_level" />
+		<property column="cust_linkman" generated="never" lazy="false"
+			name="cust_linkman" />
+		<property column="cust_phone" generated="never" lazy="false"
+			name="cust_phone" />
+		<property column="cust_mobile" generated="never" lazy="false"
+			name="cust_mobile" />
+		<!-- 配置一方 set标签name属性：表示集合的名称 -->
+	<!-- 如果不想产生多余的SQL语句，那么需要一方来放弃外键的维护！ * 在<set>标签上配置一个inverse=”true”.true:放弃.false:不放弃.默认值是false 
+			* <inverse="true">  sort一对多-->
+		<set inverse="true" name="linkmans" sort="unsorted" cascade="all-delete-orphan">
+			<!-- 需要出现子标签 外键的字段 -->
+			<key column="lkm_cust_id"  />
+			<one-to-many class="com.qq986945193.davidsshtools.domain.Linkman" />
+		</set>
+	</class>
+</hibernate-mapping>

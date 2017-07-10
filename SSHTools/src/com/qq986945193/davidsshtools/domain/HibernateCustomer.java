@@ -5,8 +5,9 @@ import java.util.Set;
 
 /**
  * 一个javabean 客户 和数据库表字段对应
+ *一方
  */
-public class Customer {
+public class HibernateCustomer {
 	/**
 	 * 
 create TABLE cst_customer (cust_id bigint(32) NOT NULL AUTO_INCREMENT COMMENT '客户编号(主键)',
@@ -36,6 +37,15 @@ create TABLE cst_customer (cust_id bigint(32) NOT NULL AUTO_INCREMENT COMMENT '�
 	private String cust_linkman;
 	private String cust_phone;
 	private String cust_mobile;
+	//Hibernate框架默认的集合是set集合，集合必须要自己手动的初始化
+	private Set<Linkman> linkmans = new HashSet<Linkman>();
+	
+	public Set<Linkman> getLinkmans() {
+		return linkmans;
+	}
+	public void setLinkmans(Set<Linkman> linkmans) {
+		this.linkmans = linkmans;
+	}
 	@Override
 	public String toString() {
 		return "Customer [cust_id=" + cust_id + ", cust_name=" + cust_name + ", cust_user_id=" + cust_user_id
