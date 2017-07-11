@@ -28,7 +28,7 @@
 		<!-- 配置一方 set标签name属性：表示集合的名称 -->
 	<!-- 如果不想产生多余的SQL语句，那么需要一方来放弃外键的维护！ * 在<set>标签上配置一个inverse=”true”.true:放弃.false:不放弃.默认值是false 
 			* <inverse="true">  sort一对多-->
-		<set inverse="true" name="linkmans" sort="unsorted" cascade="all-delete-orphan">
+		<set inverse="true" name="linkmans" sort="unsorted" cascade="save-update">
 			<!-- 需要出现子标签 外键的字段 -->
 			<key column="lkm_cust_id"  />
 			<one-to-many class="com.qq986945193.davidsshtools.domain.Linkman" />

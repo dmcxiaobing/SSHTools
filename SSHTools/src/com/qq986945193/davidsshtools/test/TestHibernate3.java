@@ -68,13 +68,13 @@ public class TestHibernate3 {
 		Transaction tr = session.beginTransaction();
 		//这个单向保存，
 		HibernateCustomer customer = new HibernateCustomer();
-		customer.setCust_name("客户1");
+		customer.setCust_name("客户张1");
 	
 		//创建两个联系人
 		Linkman linkman1 = new Linkman();
-		linkman1.setLkm_name("单向联系人1");
+		linkman1.setLkm_name("单向联系人张11");
 		Linkman linkman2 = new Linkman();
-		linkman2.setLkm_name("单向联系人2");
+		linkman2.setLkm_name("单向联系人张21");
 
 		//单向关联
 		customer.getLinkmans().add(linkman1);
@@ -133,7 +133,7 @@ public class TestHibernate3 {
 		tr.commit();
 	}	
 	/**
-	 * 测试级联保存
+	 * 测试级联保存  熊大 有外键，熊二没有
 	 */
 	@Test
 	public void fun5(){
@@ -141,13 +141,13 @@ public class TestHibernate3 {
 		Transaction tr = session.beginTransaction();
 		//保存客户和联系人的数据 
 		HibernateCustomer customer = new HibernateCustomer();
-		customer.setCust_name("客户5");
+		customer.setCust_name("david");
 
 		//创建两个联系人
 		Linkman linkman1 = new Linkman();
-		linkman1.setLkm_name("1单向联系人5");
+		linkman1.setLkm_name("熊大");
 		Linkman linkman2 = new Linkman();
-		linkman2.setLkm_name("2单向联系人5");
+		linkman2.setLkm_name("熊二");
 		
 		//联系人关联客户和客户关联联系人
 		linkman1.setCustomer(customer);
@@ -184,7 +184,7 @@ public class TestHibernate3 {
 	 * 删除联系人，级联删除客户  配置对应关系******
 	 */
 	@Test
-	public void run7(){
+	public void fun7(){
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction tr = session.beginTransaction();
 		Linkman man = session.get(Linkman.class, 3L);
@@ -196,7 +196,7 @@ public class TestHibernate3 {
 	 * 解除关系：从集合中删除联系人.将联系人删除
 	 */
 	@Test
-	public void run8(){
+	public void fun8(){
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction tr = session.beginTransaction();
 		// 先获取到客户
@@ -206,5 +206,49 @@ public class TestHibernate3 {
 		c1.getLinkmans().remove(l1);
 		tr.commit();
 	}
+	/**
+	 * 放弃外间的维护，让熊大联系人属于david客户
+	 */
+	@Test
+	public void fun9(){
+		Session session = HibernateUtils.getCurrentSession();
+		Transaction tr = session.beginTransaction();
+		//先获取到david的客户
+		HibernateCustomer david = session.get(HibernateCustomer.class, 14L);
+		//获取到熊大联系人
+		Linkman l1 = session.get(Linkman.class, 33L);
+		//做双向的关联
+		david.getLinkmans().add(l1);
+		l1.setCustomer(david);
+		//修改提交
+		tr.commit();
+	}
 	
+	/**
+	 * cascade和inverse的区别
+	 */
+	@Test
+	public void fun10(){
+		Session session = HibernateUtils.getCurrentSession();
+		Transaction tr = session.beginTransaction();
+		
+		// 级联保存
+		HibernateCustomer c1 = new HibernateCustomer();
+		c1.setCust_name("美美");
+		
+		// 创建2个联系人
+		Linkman l1 = new Linkman();
+		l1.setLkm_name("熊大");
+		Linkman l2 = new Linkman();
+		l2.setLkm_name("熊二");
+		
+		l1.setCustomer(c1);
+		l2.setCustomer(c1);
+		
+		session.save(l1);
+		session.save(l2);
+		
+		// 不用修改
+		tr.commit();
+	}
 }
