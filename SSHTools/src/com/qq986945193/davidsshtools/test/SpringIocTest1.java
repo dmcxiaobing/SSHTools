@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
+import com.qq986945193.davidsshtools.service.SpringCustomerServiceImpl;
 import com.qq986945193.davidsshtools.service.SpringUserService;
 import com.qq986945193.davidsshtools.service.SpringUserServiceImpl;
 
@@ -68,4 +69,25 @@ public class SpringIocTest1 {
 		//如果调用classPathXmlApplicationContext的关闭方法，即关闭工厂，则对象即会销毁
 		classPathXmlApplicationContext.close();
 	}
+/*======================================================================================*/
+	/**
+	 * 原始的方式操作我们的业务层和持久层
+	 */
+	@Test
+	public void fun2(){
+		SpringCustomerServiceImpl serviceImpl = new SpringCustomerServiceImpl();
+		serviceImpl.save();
+	}
+	/**
+	 * 利用spring的方式操作我们的业务层和持久层
+	 */
+	@Test
+	public void fun3(){
+		//创建工厂，加载配置文件。此时，CustomerDaoImpl创建了，CustomerServiceImpl也被创建了
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		SpringCustomerServiceImpl serviceImpl = (SpringCustomerServiceImpl) applicationContext.getBean("customerService");
+		serviceImpl.save();
+	}
+/*======================================================================================*/
+	
 }
