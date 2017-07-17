@@ -19,16 +19,17 @@
 		<property name="hibernate.format_sql">true</property>
 		<!-- 生成数据库的表结构 update:如果没有表结构，则创建表结构。如果存在，不会创建，添加数据 -->
 		<property name="hibernate.hbm2ddl.auto">update</property>
-		<!-- 设置数据库的隔离级别，就使用默认值就OK 
-		<property name="hibernate.connection.isolation">4</property> -->
+		<!-- 设置数据库的隔离级别，就使用默认值就OK <property name="hibernate.connection.isolation">4</property> -->
 		<!-- 开启绑定本地的session -->
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<!-- 映射配置文件，需要引入映射的配置文件 -->
 		<mapping resource="com/qq986945193/davidsshtools/domain/Customer.hbm.xml" />
 		<mapping resource="com/qq986945193/davidsshtools/domain/User.hbm.xml" />
-			<mapping resource="com/qq986945193/davidsshtools/domain/HibernateCustomer.hbm.xml" />
+		<mapping
+			resource="com/qq986945193/davidsshtools/domain/HibernateCustomer.hbm.xml" />
 		<mapping resource="com/qq986945193/davidsshtools/domain/Linkman.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/UserActionBean.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>
