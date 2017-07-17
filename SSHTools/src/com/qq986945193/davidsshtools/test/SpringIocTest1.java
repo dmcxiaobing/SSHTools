@@ -7,6 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
+import com.qq986945193.davidsshtools.domain.SpringCar1;
+import com.qq986945193.davidsshtools.domain.SpringCar2;
+import com.qq986945193.davidsshtools.domain.SpringPerson;
+import com.qq986945193.davidsshtools.domain.SpringUser1;
 import com.qq986945193.davidsshtools.service.SpringCustomerServiceImpl;
 import com.qq986945193.davidsshtools.service.SpringUserService;
 import com.qq986945193.davidsshtools.service.SpringUserServiceImpl;
@@ -89,5 +93,54 @@ public class SpringIocTest1 {
 		serviceImpl.save();
 	}
 /*======================================================================================*/
+	/**
+	 * 以构造方法获取到javabean对象
+	 */
+	@Test
+	public void fun4(){
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		SpringCar1 car1 = (SpringCar1) applicationContext.getBean("car1");
+		System.out.println(car1);
+	}
+	
+	/**
+	 * 以构造方法获取到javabean对象 javabean之间有依赖
+	 */
+	@Test
+	public void fun5() {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		SpringPerson person = (SpringPerson) applicationContext.getBean("person");
+		System.out.println(person);
+	}
+	/**
+	 * 以set方式测试javabean
+	 */
+	@Test
+	public void fun6(){
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		SpringCar2 car2 = (SpringCar2) applicationContext.getBean("car2");
+		System.out.println(car2);
+	}
+	/**
+	 * 测试注入集合
+	 */
+	@Test
+	public void fun7(){
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		SpringUser1 user1 = (SpringUser1) applicationContext.getBean("user");
+		System.err.println(user1);
+	}
+	
+	/**
+	 * 测试加载多个配置文件。加载多个applicationContext.xml
+	 */
+	@Test
+	public void fun8(){
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml","applicationContext2.xml");
+		SpringUser1 user1 = (SpringUser1) applicationContext.getBean("user");
+		System.out.println(user1);
+	}
 	
 }
+
+
