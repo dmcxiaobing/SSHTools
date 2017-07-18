@@ -21,9 +21,14 @@
 		<!-- 先配置多方 name 当前JavaBean中的属性 class 属性的全路径 column 外键的字段 -->
 		<!-- 如果不想产生多余的SQL语句，那么需要一方来放弃外键的维护！ * 在<set>标签上配置一个inverse=”true”.true:放弃.false:不放弃.默认值是false 
 			* <inverse="true"> -->
+			<!-- 多方的配置 
+			cascade="save-update" 级联保存。因为客户表已配置，联系人表这里不再配置
+			name.一方在多方javabean中属性名称 
+			 class 一方的类路径。
+			 column 外键的名称-->
 		<many-to-one name="customer"
 			class="com.qq986945193.davidsshtools.domain.HibernateCustomer"
-			column="lkm_cust_id" cascade="save-update" />
+			column="lkm_cust_id"  />
 
 	</class>
 

@@ -38,9 +38,9 @@ public class TestHibernate3 {
 		
 		//创建两个联系人
 		Linkman linkman1 = new Linkman();
-		linkman1.setLkm_name("联系人1");
+		linkman1.setLkm_name("双向关联系人1");
 		Linkman linkman2 = new Linkman();
-		linkman2.setLkm_name("联系人2");
+		linkman2.setLkm_name("双向关联系人2");
 
 		//演示双向关联
 		hibernateCustomer.getLinkmans().add(linkman1);
@@ -61,6 +61,8 @@ public class TestHibernate3 {
     * 使用cascade="save-update"
     * 1. cascade用来级联操作（保存、修改和删除）
 		2. inverse用来维护外键的
+		
+		单向级联保存。客户表和联系人表都有数据，inverse="false" 如果为false则会关联，否则则放弃外键维护，这样就不会关联
 	 */
 	@Test
 	public void fun2(){
@@ -109,6 +111,7 @@ public class TestHibernate3 {
 	
 	/**
 	 * 级联保存，保存联系人，级联：客户 cascade用来级联操作（保存、修改和删除）
+	 * 如果用联系人多方进行级联保存，需要 cascade="save-update" 配置在联系人方
 	 */
 	@Test
 	public void fun4(){
@@ -133,7 +136,8 @@ public class TestHibernate3 {
 		tr.commit();
 	}	
 	/**
-	 * 测试级联保存  熊大 有外键，熊二没有
+	 * 测试级联保存  熊大 有外键，熊二没有  这里因为是级联保存，所以双方都要配置：	cascade="save-update"
+	 * 由于熊大有外键，所以是从联系人表级联保存，所以客户表放弃外键维护这样熊二才没有外键
 	 */
 	@Test
 	public void fun5(){
@@ -158,8 +162,8 @@ public class TestHibernate3 {
 	
 	
 	/**
-	 * 测试：删除客户，客户下有2个联系人
-	 * 
+	 * 测试：删除客户，客户下有2个联系人inverse="false" name="linkmans" sort="unsorted" cascade="delete"
+	 * 如果改为save-update则不会删除
 	 * 测试级联删除，删除客户，级联删除客户下的联系人
 	 * 
 	 * none                  -- 不使用级联
@@ -174,49 +178,52 @@ public class TestHibernate3 {
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction tr = session.beginTransaction();
 		// 先查询1号客户
-		HibernateCustomer customer = session.get(HibernateCustomer.class, 2L);
+		HibernateCustomer customer = session.get(HibernateCustomer.class, 45L);
 		session.delete(customer);
 		
 		tr.commit();
 	}
 	
 	/**
-	 * 删除联系人，级联删除客户  配置对应关系******
+	 * 删除联系人，级联删除客户  配置对应关系****************
 	 */
 	@Test
 	public void fun7(){
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction tr = session.beginTransaction();
-		Linkman man = session.get(Linkman.class, 3L);
+		Linkman man = session.get(Linkman.class, 10L);
 		session.delete(man);
 		tr.commit();
 	}
 	
 	/**
 	 * 解除关系：从集合中删除联系人.将联系人删除
+	 * one-to-many cascade="all-delete-orphan " 删除联系人
 	 */
 	@Test
 	public void fun8(){
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction tr = session.beginTransaction();
 		// 先获取到客户
-		HibernateCustomer c1 = session.get(HibernateCustomer.class, 2L);
-		Linkman l1 = session.get(Linkman.class, 13L);
+		HibernateCustomer c1 = session.get(HibernateCustomer.class, 43L);
+		Linkman l1 = session.get(Linkman.class, 9L);
+		System.out.println(c1);
 		// 解除
 		c1.getLinkmans().remove(l1);
 		tr.commit();
 	}
 	/**
-	 * 放弃外间的维护，让熊大联系人属于david客户
+	 * 更改外间的维护，让熊大联系人属于david客户	
+	 *one-to-many cascade="all-delete-orphan "
 	 */
 	@Test
 	public void fun9(){
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction tr = session.beginTransaction();
 		//先获取到david的客户
-		HibernateCustomer david = session.get(HibernateCustomer.class, 14L);
+		HibernateCustomer david = session.get(HibernateCustomer.class, 43L);
 		//获取到熊大联系人
-		Linkman l1 = session.get(Linkman.class, 33L);
+		Linkman l1 = session.get(Linkman.class, 16L);
 		//做双向的关联
 		david.getLinkmans().add(l1);
 		l1.setCustomer(david);
@@ -225,7 +232,7 @@ public class TestHibernate3 {
 	}
 	
 	/**
-	 * cascade和inverse的区别
+	 * cascade 是操作外键。和inverse是维护外键。的区别
 	 */
 	@Test
 	public void fun10(){

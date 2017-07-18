@@ -1,0 +1,114 @@
+ MIME的编码介绍(base64)及使用的意义
+
+一、MIME: Multipurpose Internet Mail Extensions
+　　英国帝国大学计算机在线字典FOLDOC对MIME的解释为:“多部分(multi-part)、多媒体电子邮件和WWW超文本的一种编码标准，用于传送诸如图形、声音和传真等非文本数据。MIME定义于RFC1341，用MIMENCODE的方法将二进制数据转换成为一种被称为BASE64的ASCII子集的字符的组合。”
+　　Internet上有专门讨论MIME的新闻组: comp.mail.mime。该新闻组的FAQ可以从下面的网点获得：
+    http://www.cis.ohio-state.edu/hypertext/faq/usenet/mail/mime-faq/mime0/faq.html
+　　MIMENCODE最早称为MMENCODE，提出用MIMENCODE代替UUENCODE，是因为UUENCODE使用了一些字符在一些邮件网关（特别是那些转换ASCII和EBCDIC码的网关）中造成传输障碍，（还有一些软件不能对所有 UUENCODE 的算法进行正确解码而导致邮件的阅读困难），因此 MIME 被设计用于替代UUENCODE，但是结果是这些协议共存。
+    在MIME出台之前，使用RFC 822只能发送基本的ASCII码文本信息，邮件内容如果要包括二进制文件、声音和动画等，实现起来非常困难。
+    MIME提供了一种可以在邮件中附加多种不同编码文件的方法，弥补了原来的信息格式的不足。实际上不仅仅是邮件编码，现在MIME经成为HTTP协议标准的一个部分。
+二、MIME编码方式简介
+　　对邮件进行编码最初的原因是因为 Internet 上的很多网关不能正确传输8bit内码的字符，比如汉字等。编码的原理就是把8bit的内容转换成7bit的形式以能正确传输，在接收方收到之后，再将其还原成8bit的内容。
+　　在MIME协议之前，邮件的编码曾经有过UUENCODE等编码方式 ，但是由于MIME协议算法简单，并且易于扩展，现在已经成为邮件编码方式的主流，不仅是用来传输8bit的字符，也可以用来传送二进制的文件，如邮件附件中的图像、音频等信息，而且扩展了很多基于MIME 的应用。从编码方式来说，MIME定义了两种编码方法Base64与QP(Quote-Printable)。
+1.Base64编码
+　　Base64是一种通用的方法，其原理很简单，就是把三个Byte的数据用4个Byte表示。在这四个Byte中，实际用到的都只有前面6bit，这样就不存在只能传输7bit的字符的问题了。Base64的缩写一般是“B”。
+    Base64将输入的字符串或一段数据编码成只含有{'A'-'Z', 'a'-'z', '0'-'9', '+', '/'}这64个字符的串，'='用于填充。
+    其编码的方法是，将输入数据流每次取6bit，用此6bit的值(0-63)作为索引去查表，输出相应字符。
+    这样，每3个字节将编码为4个字符(3×8 → 4×6)；不满4个字符的以'='填充。
+    有的场合，以“=?charset?B?xxxxxxxx?=”表示xxxxxxxx是Base64编码，且原文的字符集是charset。在段体内则直接编码，适当时机换行，MIME建议每行最多76个字符。
+    Base64的算法很简单，它将字符流顺序放入一个24位的缓冲区，缺字符的地方补零。
+    然后将缓冲区截断成为4个部分，高位在先，每个部分6位，用64个字符重新表示。如果输入只有一个或两个字节，那么输出将用等号“=”补足。这可以隔断附加的信息造成编码的混乱。
+2.QP编码
+　　另一种方法是QP(Quote-Printable) 方法，通常缩写为“Q”方法，其原理是把一个8bit的字符用两个16进制数值表示，然后在前面加“=”。所以我们看到经过QP编码后的文件通常是这个样子：=B3=C2=BF=A1=C7=E5=A3= AC=C4=FA=BA=C3=A3=A1。
+     Quoted -printable根据输入的字符串或字节范围进行编码，若是不需编码的字符，直接输出。若需要编码，则先输出'='，后面跟着以2个字符表示的十六进制字节值。有的场合，以“=?charset?Q?xxxxxxxx?=”表示xxxxxxxx是Quoted-printable编码，且原文的字符集是charset。在段体内则直接编码，适当时机换行，换行前额外输出一个'='。
+
+三MIME的头信息
+    邮件头
+    在邮件头中，有很多从RFC 822沿用的域名，MIME也增加了一些。常见的标准域名和含义如下:
+    域名                           含义               添加者
+    Received                      传输路径            各级邮件服务器
+    Return-Path                   回复地址            目标邮件服务器
+    Delivered-To                  发送地址            目标邮件服务器
+    Reply-To                      回复地址            邮件的创建者
+    From                          发件人地址          邮件的创建者
+    To                            收件人地址          邮件的创建者
+    Cc                            抄送地址            邮件的创建者
+    Bcc                           暗送地址            邮件的创建者
+    Date                          日期和时间          邮件的创建者
+    Subject                       主题               邮件的创建者
+    Message-ID                    消息ID             邮件的创建者
+    MIME-Version                  MIME版本           邮件的创建者
+    Content-Type                  内容的类型          邮件的创建者
+    Content-Transfer-Encoding     内容的传输编码方式   邮件的创建者
+    非标准的、自定义域名都以X-开头，例如X-Mailer, X-MSMail-Priority等，通常在接收和发送邮件的是同一程序时才能理解它们的意义。
+    段头
+    在段头中，大致有如下一些域:
+    域名                               含义
+    Content-Type                      段体的类型
+    Content-Transfer-Encoding         段体的传输编码方式
+    Content-Disposition               段体的安排方式
+    Content-ID                        段体的ID
+    Content-Location                  段体的位置(路径)
+    Content-Base                      段体的基位置
+    有的域除了值之外，还带有参数。值与参数、参数与参数之间以“;”分隔。参数名与参数值之间以“=”分隔。
+1.MIME-Version
+　　表示使用的MIME的版本号，一般是1.0;
+     如:
+     MIME-Version: 1.0
+2.Content-Type
+    Content-Type定义了正文的类型，我们实际上是通过这个标识来知道正文内是什么类型的文件。比如：text/plain 表示的是无格式的文本正文，text/html 表示的 Html 文档，image/gif 表示的是 gif 格式的图片等等。Content-Type都是“主类型/子类型”的形式。主类型有text, image, audio, video, application, multipart, message等，分别表示文本、图片、音频、视频、应用、分段、消息等。每个主类型都可能有多个子类型，如text类型就包含plain, html, xml, css等子类型。以X-开头的主类型和子类型，同样表示自定义的类型，未向IANA正式注册，但大多已经约定成俗了。如application/x-zip-compressed是ZIP文件类型。在Windows中，注册表的“HKEY_CLASSES_ROOT/MIME/Database/Content Type”内列举了除multipart之外大部分已知的Content-Type。
+    关于参数的形式，RFC里有很多补充规定，有的允许带几个参数，较为常见的有:
+    主类型           参数名           含义
+    text            charset         字符集
+    image           name            名称
+    application     name            名称
+    multipart       boundary        边界
+   multipart类型
+   邮件中常用到的复合类型:multipart。
+   multipart类型表示正文是由多个部分组成的，后面的子类型说明的是这些部分之间的关系。
+
+   邮件中用到的三个类型有:
+   (1).multipart/alternative：表示正文由两个部分组成，可以选择其中的任意一个。主要作用是在征文同时有text格式和html格式时，可以在两个正文中选择一个来显示，支持 html 格式的邮件客户端软件一般会显示其 HTML 正文，而不支持的则会显示其Text正文；
+   (2).multipart/mixed：表示文档的多个部分是混合的，指正文与附件的关系。如果邮件的MIME类型是multipart/mixed，即表示邮件带有附件。
+   (3).multipart/related：表示文档的多个部分是相关的，一般用来描述 Html 正文与其相关的图片。
+
+
+   multipart类型，是MIME邮件的精髓。邮件体被分为多个段，每个段又包含段头和段体两部分，这两部分之间也以空行分隔。它们之间的层次关系可归纳为下图所示：
+      +------------------------- multipart/mixed ----------------------------+
+      |                                                                       |
+      |   +----------------- multipart/related ------------------+             |
+      |   |                                                       |             |
+      |   |   +----- multipart/alternative ------+   +----------+   |   +------+   |
+      |   |   |                                   |   | 内嵌资源   |   |   | 附件 |   |
+      |   |   |   +------------+   +------------+   |   +----------+   |   +------+   |
+      |   |   |   | 纯文本正文 |   | 超文本正文 |   |                 |              |
+      |   |   |   +------------+   +------------+   |   +----------+   |   +------+   |
+      |   |   |                                   |   | 内嵌资源   |   |   | 附件 |   |
+      |   |   +----------------------------------+   +----------+   |   +------+   |
+      |   |                                                       |             |
+      |   +------------------------------------------------------+             |
+      |                                                                       |
+      +----------------------------------------------------------------------+
+
+    可以看出，如果在邮件中要添加附件，必须定义multipart/mixed段；如果存在内嵌资源，至少要定义multipart/related段；如果纯文本与超文本共存，至少要定义multipart/alternative段。什么是“至少”？举个例子说，如果只有纯文本与超文本正文，那么在邮件头中将类型扩大化，定义为multipart/related，甚至multipart/mixed，都是允许的。
+    multipart诸类型的共同特征是，在段头指定“boundary”参数字符串，段体内的每个子段以此串定界。所有的子段都以“--”+boundary行开始，父段则以“--”+boundary+“--”行结束。段与段之间也以空行分隔。在邮件体是multipart类型的情况下，邮件体的开始部分(第一个“--” +boundary行之前)可以有一些附加的文本行，相当于注释，解码时应忽略。段间也可以有一些附加的文本行，不会显示出来。
+　　这些复合类型又是可以嵌套使用的，比如说一个带有附件的邮件，同时有html与text两种格式的正文，则邮件的结构是：
+　　Content-Type: multipart/mixed
+　　部分一：
+　　Content Type : multipart/alternative：
+　　Text 正文；
+　　Html 格式的正文　
+　　部分二：
+　　附件
+　　邮件结束符；
+　　由于复合类型由多个部分组成，因此，需要一个分隔符来分隔这多个部分，这就是上面的邮件源文件中的boundary所描述的，对于每一个Contect type :multipart/* 的内容，都会有这么一个说明，表示多个部分之间的分隔。
+　　含有 MIME/BASE64编码的邮件，你查看它的源码时一般都含有:“This is a multi-part message in MIME format.”这样的句子。也可以被绝大多数的email程序进行解码，包括Netscape、MS Mail、Eudora等。这些程序可以正确识别邮件的正文，恢 MIME/BASE64 编码的部分为正确的文字或夹带的二进制文件。
+3.Content-Transfer-Encoding
+   它表示了这个部分文档的编码方式。只有识别了这个说明，才能用正确的解码方式实现对其解码。
+   Content-Transfer-Encoding共有Base64, Quoted-printable, 7bit, 8bit, Binary等几种。
+   其中7bit是缺省的编码方式。电子邮件源码最初设计为全部是可打印的ASCII码的形式。
+   非ASCII码的文本或数据要编码成要求的格式。
+   Base64, Quoted-Printable是在非英语国家使用最广使的编码方式。
+   Binary方式只具有象征意义，而没有任何实用价值。
+4.boundary
+   这个分隔符是正文中不可能出现的一串古字符的组合，在文档中，以"--"加上这个boundary 来表示一个部分的开始，在文档的结束，以"--"加boundary再在最后加上"--"来表示文档的结束。由于复合类型是可以嵌套使用的，因此，邮件中可能会多个boundary。

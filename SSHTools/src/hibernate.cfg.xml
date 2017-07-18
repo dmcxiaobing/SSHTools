@@ -30,6 +30,8 @@
 			resource="com/qq986945193/davidsshtools/domain/HibernateCustomer.hbm.xml" />
 		<mapping resource="com/qq986945193/davidsshtools/domain/Linkman.hbm.xml" />
 		<mapping resource="com/qq986945193/davidsshtools/domain/UserActionBean.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/HibernateUser.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/HibernateRole.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>
