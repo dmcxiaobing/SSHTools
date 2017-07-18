@@ -15,6 +15,20 @@ public class Linkman {
 	//编写一个对象，不要自己new
 	private HibernateCustomer customer;
 	
+	@Override
+	public String toString() {
+		return "Linkman [lkm_id=" + lkm_id + ", lkm_name=" + lkm_name + ", lkm_gender=" + lkm_gender + ", lkm_phone="
+				+ lkm_phone + ", lkm_mobile=" + lkm_mobile + ", lkm_email=" + lkm_email + ", lkm_qq=" + lkm_qq
+				+ ", lkm_position=" + lkm_position + ", lkm_memo=" + lkm_memo + ", customer=" + customer + "]";
+	}
+	public Linkman() {
+		super();
+	}
+	public Linkman(String lkm_name, String lkm_gender) {
+		super();
+		this.lkm_name = lkm_name;
+		this.lkm_gender = lkm_gender;
+	}
 	public HibernateCustomer getCustomer() {
 		return customer;
 	}
