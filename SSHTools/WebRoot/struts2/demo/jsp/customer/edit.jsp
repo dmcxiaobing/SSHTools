@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<TITLE>添加联系人</TITLE> 
+<TITLE>添加客户</TITLE> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
@@ -15,17 +15,17 @@
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/servlet/LinkmanServlet?method=addLinkman"
+		action="${pageContext.request.contextPath }/servlet/CustomerServlet?method=editSaveCustomer"
 		method=post>
-		
+		<input type="hidden" name="cust_id" value="${customer.cust_id }"/>
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
 				<TR>
 					<TD width=15><IMG src="${pageContext.request.contextPath }/images/new_019.jpg"
 						border=0></TD>
-					<TD width="100%" background="${pageContext.request.contextPath }/images/new_020.jpg"
-						 height=20></TD>
+					<TD width="100%" background=${pageContext.request.contextPath }/images/new_020.jpg
+						height=20></TD>
 					<TD width=15><IMG src="${pageContext.request.contextPath }/images/new_021.jpg"
 						border=0></TD>
 				</TR>
@@ -39,45 +39,56 @@
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：联系人管理 &gt; 添加联系人</TD>
+								<TD class=manageHead>当前位置：客户管理 &gt; 修改客户</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
 							</TR>
 						</TABLE>
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
-							<tr>
-								<td>所属客户：</td>
-								<td colspan="3"><input type="text" name="cust_id" style="WIDTH: 180px"/></td>
-							</tr>
 							<TR>
-								<td>联系人名称：</td>
+								<td>客户名称：</td>
+								<td>
+								<INPUT class=textbox id=sChannel2									   
+											style="WIDTH: 180px" maxLength=50 name="cust_name" value="${customer.cust_name }">
+								</td>
+								<td>客户级别 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkm_name">
+														style="WIDTH: 180px" maxLength=50 name="cust_level" value="${customer.cust_level }">
 								</td>
-								<td>联系人性别：</td>
+							</TR>
+							
+							<TR>
+								<td>信息来源：</td>
 								<td>
-								<input type="radio" value="1" name="lkm_gender">男
-								<input type="radio" value="2" name="lkm_gender">女
+								<INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="cust_source" value="${customer.cust_source }">
+								</td>
+								<td>联系人：</td>
+								<td>
+								<INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="cust_linkman" value="${customer.cust_linkman }">
 								</td>
 							</TR>
 							<TR>
-								<td>联系人办公电话 ：</td>
+								
+								
+								<td>固定电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkm_phone">
+														style="WIDTH: 180px" maxLength=50 name="cust_phone" value="${customer.cust_phone }">
 								</td>
-								<td>联系人手机 ：</td>
+								<td>移动电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkm_mobile">
+														style="WIDTH: 180px" maxLength=50 name="cust_mobile" value="${customer.cust_mobile }">
 								</td>
 							</TR>
 							<tr>
 								<td rowspan=2>
 								<INPUT class=button id=sButton2 type=submit
-														value="保存 " name=sButton2>
+														value=" 保存 " name=sButton2>
 								</td>
 							</tr>
 						</TABLE>

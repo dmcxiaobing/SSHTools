@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.qq986945193.davidsshtools.domain.Linkman" table="cst_linkman">
+	<class name="com.qq986945193.davidsshtools.domain.Linkman" table="cst_linkman" >
 		<id name="lkm_id" column="lkm_id">
 			<generator class="native" />
 		</id>

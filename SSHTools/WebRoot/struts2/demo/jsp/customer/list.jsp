@@ -123,11 +123,11 @@
 									<TD><SPAN id=pagelink>
 											<DIV
 												style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
-												共[<B>${pageBean.totalSize}</B>]条记录,[<B>${pageBean.totalPage}</B>]页 ,每页显示 <select
+												共[<B>${total}</B>]条记录,[<B>${totalPage}</B>]页 ,每页显示 <select
 													name="pageSize">
 
-													<option value="10"
-														<c:if test="${pageSize==10 }">selected</c:if>>10</option>
+													<option value="15"
+														<c:if test="${pageSize==1 }">selected</c:if>>1</option>
 													<option value="30"
 														<c:if test="${pageSize==30 }">selected</c:if>>30</option>
 												</select> 条 [<A href="javascript:to_page(${page-1})">前一页</A>] <B>${page}</B>

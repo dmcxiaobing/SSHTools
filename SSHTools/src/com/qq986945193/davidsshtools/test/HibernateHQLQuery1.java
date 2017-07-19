@@ -182,8 +182,9 @@ public class HibernateHQLQuery1 {
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction tr = session.beginTransaction();
 		//查询联系人
-		Query query = session.createQuery("select new Linkman(lkm_name,lkm_gender) from Linkman");
-		List<Linkman> list = query.list();
+//		Query query = session.createQuery("select new Linkman(lkm_name,lkm_gender) from Linkman");
+//		List<Linkman> list = query.list();
+		List<Linkman> list =  session.createQuery("from Linkman").list();
 		for (Linkman linkman : list) {
 			System.out.println(linkman);
 		}

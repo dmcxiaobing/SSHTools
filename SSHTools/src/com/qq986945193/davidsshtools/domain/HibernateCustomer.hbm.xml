@@ -3,7 +3,7 @@
                                    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="false">
 	<class name="com.qq986945193.davidsshtools.domain.HibernateCustomer"
-		table="cst_hibernate_customer">
+		table="cst_hibernate_customer" lazy="false">
 		<id column="cust_id" name="cust_id">
 			<generator class="native" />
 		</id>

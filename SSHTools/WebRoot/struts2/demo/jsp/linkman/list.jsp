@@ -90,15 +90,15 @@
 												<c:forEach items="${list }" var="linkman">
 												<TR
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
-													<TD>${linkman.lkm_name }</TD>
-													<TD>${linkman.lkm_gender }</TD>
-													<TD>${linkman.lkm_phone }</TD>
-													<TD>${linkman.lkm_mobile }</TD>
+													<TD>${linkman.lkmName }</TD>
+													<TD>${linkman.lkmGender }</TD>
+													<TD>${linkman.lkmPhone }</TD>
+													<TD>${linkman.lkmMobile }</TD>
 													
 													<TD>
-													<a href="${pageContext.request.contextPath }/linkmanServlet?method=edit&lkmId=${linkman.lkm_id}">修改</a>
+													<a href="${pageContext.request.contextPath }/linkmanServlet?method=edit&lkmId=${linkman.lkmId}">修改</a>
 													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/linkmanServlet?method=delete&lkmId=${linkman.lkm_id}">删除</a>
+													<a href="${pageContext.request.contextPath }/linkmanServlet?method=delete&lkmId=${linkman.lkmId}">删除</a>
 													</TD>
 												</TR>
 												

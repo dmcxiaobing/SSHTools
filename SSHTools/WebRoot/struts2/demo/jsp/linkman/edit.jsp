@@ -15,9 +15,9 @@
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/servlet/LinkmanServlet?method=addLinkman"
+		action="${pageContext.request.contextPath }/linkmanServlet?method=editsubmit"
 		method=post>
-		
+		<input type="hidden" name="lkmId" value="${linkman.lkmId }"/>
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
@@ -39,7 +39,7 @@
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：联系人管理 &gt; 添加联系人</TD>
+								<TD class=manageHead>当前位置：联系人管理 &gt; 修改联系人</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
@@ -48,30 +48,31 @@
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
 							<tr>
 								<td>所属客户：</td>
-								<td colspan="3"><input type="text" name="cust_id" style="WIDTH: 180px"/></td>
+								<td colspan="3"><input type="text" name="custId" style="WIDTH: 180px" value="${linkman.cstCustomer.custId}" /></td>
 							</tr>
 							<TR>
 								<td>联系人名称：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkm_name">
+														style="WIDTH: 180px" maxLength=50 name="lkmName" value="${linkman.lkmName}" >
 								</td>
 								<td>联系人性别：</td>
 								<td>
-								<input type="radio" value="1" name="lkm_gender">男
-								<input type="radio" value="2" name="lkm_gender">女
+								<input type="radio" value="1" name="lkmGender" <c:if test="${linkman.lkmGender=='1' }">checked</c:if>>男
+								
+								<input type="radio" value="2" name="lkmGender" <c:if test="${linkman.lkmGender=='2' }">checked</c:if>>女
 								</td>
 							</TR>
 							<TR>
 								<td>联系人办公电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkm_phone">
+														style="WIDTH: 180px" maxLength=50 name="lkmPhone" value="${linkman.lkmPhone}">
 								</td>
 								<td>联系人手机 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkm_mobile">
+														style="WIDTH: 180px" maxLength=50 name="lkmMobile" value="${linkman.lkmMobile}">
 								</td>
 							</TR>
 							<tr>

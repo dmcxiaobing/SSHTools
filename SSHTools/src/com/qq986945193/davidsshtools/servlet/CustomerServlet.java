@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.david.webtools.common.utils.CommonUtils;
+import com.google.gson.Gson;
 import com.qq986945193.davidsshtools.domain.Customer;
+import com.qq986945193.davidsshtools.domain.PageBean;
 import com.qq986945193.davidsshtools.service.CustomerService;
 
 /**
@@ -24,9 +26,14 @@ public class CustomerServlet extends BaseServlet {
 			throws ServletException, IOException {
 		// 得到用户筛选输入的内容
 		String custNameValue = request.getParameter("custName");
+		String pageSize = request.getParameter("pageSize");
 		// 查询数据库得到客户列表
-		List<Customer> cutomerLists = customerService.catListCustomer(custNameValue);
+		List<Customer> cutomerLists = customerService.catListCustomer(custNameValue,pageSize);
+		PageBean pageBean = new PageBean();
+		request.setAttribute("pageBean", customerService.getPageBean(pageBean,pageSize));
 		request.setAttribute("list", cutomerLists);
+		String jsonString = new Gson().toJson(cutomerLists);
+		System.out.println(jsonString);
 		return "f:/jsp/customer/list.jsp";
 	}
 
