@@ -40,18 +40,18 @@ create TABLE cst_customer (cust_id bigint(32) NOT NULL AUTO_INCREMENT COMMENT '�
 	//Hibernate框架默认的集合是set集合，集合必须要自己手动的初始化
 	private Set<Linkman> linkmans = new HashSet<Linkman>();
 	
+	@Override
+	public String toString() {
+		return "HibernateCustomer [cust_id=" + cust_id + ", cust_name=" + cust_name + ", cust_user_id=" + cust_user_id
+				+ ", cust_create_id=" + cust_create_id + ", cust_source=" + cust_source + ", cust_industry="
+				+ cust_industry + ", cust_level=" + cust_level + ", cust_linkman=" + cust_linkman + ", cust_phone="
+				+ cust_phone + ", cust_mobile=" + cust_mobile +"]";
+	}
 	public Set<Linkman> getLinkmans() {
 		return linkmans;
 	}
 	public void setLinkmans(Set<Linkman> linkmans) {
 		this.linkmans = linkmans;
-	}
-	@Override
-	public String toString() {
-		return "Customer [cust_id=" + cust_id + ", cust_name=" + cust_name + ", cust_user_id=" + cust_user_id
-				+ ", cust_create_id=" + cust_create_id + ", cust_source=" + cust_source + ", cust_industry="
-				+ cust_industry + ", cust_level=" + cust_level + ", cust_linkman=" + cust_linkman + ", cust_phone="
-				+ cust_phone + ", cust_mobile=" + cust_mobile + "]";
 	}
 	public Long getCust_id() {
 		return cust_id;

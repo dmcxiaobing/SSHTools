@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.DetachedCriteria;
 
 import com.qq986945193.davidsshtools.dao.LinkmanDao;
 import com.qq986945193.davidsshtools.domain.HibernateCustomer;
@@ -45,16 +46,17 @@ public class LinkmanService {
 
 	/**
 	 * 查询所有联系人
+	 * @param detachedCriteria 
 	 * 
 	 * @return
 	 */
-	public List<Linkman> findAll() {
+	public List<Linkman> findAll(DetachedCriteria detachedCriteria) {
 		// 开启事务，然后调用持久层的代码，最后提交事务
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {
 			// 根据ID查询到客户，然后将客户设置到联系人
-			List<Linkman> lists = linkmanDao.findAll();
+			List<Linkman> lists = linkmanDao.findAll(detachedCriteria);
 			transaction.commit();
 			return lists;
 		} catch (Exception e) {

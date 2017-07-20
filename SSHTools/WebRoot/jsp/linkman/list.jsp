@@ -24,7 +24,7 @@
 </HEAD>
 <BODY>
 	<FORM id="customerForm" name="customerForm"
-		action="${pageContext.request.contextPath }/linkmanServlet?method=list"
+		action="${pageContext.request.contextPath }/servlet/LinkmanServlet?method=findAll"
 		method=post>
 		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>

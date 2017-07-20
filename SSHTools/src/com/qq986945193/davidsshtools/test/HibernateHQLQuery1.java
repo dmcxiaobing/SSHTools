@@ -176,6 +176,8 @@ public class HibernateHQLQuery1 {
 	 * HQL投影查询，只查询几个字段，不是所有的字段
 	 * 第一步：需要在JavaBean类提供对应的构造方法，记得再添加无参的构造方法
 	 * 第二部：HQL语句的发生变化好HQL7方法是不同的
+	 * 
+	 * 将客户表修改为不支持懒加载
 	 */
 	@Test
 	public void HQL8() {

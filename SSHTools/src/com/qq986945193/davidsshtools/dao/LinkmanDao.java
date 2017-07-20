@@ -3,6 +3,7 @@ package com.qq986945193.davidsshtools.dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 
 import com.qq986945193.davidsshtools.domain.HibernateCustomer;
 import com.qq986945193.davidsshtools.domain.Linkman;
@@ -43,12 +44,12 @@ public class LinkmanDao {
 
 	/**
 	 * 查询所有联系人
+	 * @param detachedCriteria 
 	 * @return
 	 */
-	public List<Linkman> findAll() {
+	public List<Linkman> findAll(DetachedCriteria detachedCriteria) {
 		Session session = HibernateUtils.getCurrentSession();
-		List<Linkman> linkmans =  session.createQuery("from Linkman").list();
-		System.out.println(":;d"+linkmans.size());
+		List<Linkman> linkmans =  detachedCriteria.getExecutableCriteria(session).list();
 		return linkmans;
 	}
 

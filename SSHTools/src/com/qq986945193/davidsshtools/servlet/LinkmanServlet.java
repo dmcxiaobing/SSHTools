@@ -7,6 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+
 import com.david.webtools.common.base.BaseServlet;
 import com.david.webtools.common.utils.CommonUtils;
 import com.qq986945193.davidsshtools.domain.Linkman;
@@ -42,12 +45,20 @@ public class LinkmanServlet extends BaseServlet {
 	}
 
 	/**
-	 * 查看联系人列表联系人
+	 * 查看联系人列表联系人  这里使用离线查询
 	 */
 	public String findAll(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+//		创建离线查询对象
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Linkman.class);
+		String formName = request.getParameter("lkmName");
+		//添加查询的条件
+		if (formName!=null && !formName.trim().isEmpty()) {
+			//拼接查询的条件。
+			detachedCriteria.add(Restrictions.like("lkm_name", "%"+formName+"%"));
+		}
 		// 查询联系人列表
-		List<Linkman> lists = linkmanService.findAll();
+		List<Linkman> lists = linkmanService.findAll(detachedCriteria);
 		request.setAttribute("list", lists);
 		return "/jsp/linkman/list.jsp";
 

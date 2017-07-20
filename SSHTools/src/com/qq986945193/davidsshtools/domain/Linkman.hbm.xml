@@ -4,8 +4,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.qq986945193.davidsshtools.domain.Linkman" table="cst_linkman" >
-		<id name="lkm_id" column="lkm_id">
+	<class  name="com.qq986945193.davidsshtools.domain.Linkman" table="cst_linkman" >
+		<id name="lkm_id" column="lkm_id" >
 			<generator class="native" />
 		</id>
 
@@ -26,7 +26,7 @@
 			name.一方在多方javabean中属性名称 
 			 class 一方的类路径。
 			 column 外键的名称-->
-		<many-to-one name="customer"
+		<many-to-one name="customer" 
 			class="com.qq986945193.davidsshtools.domain.HibernateCustomer"
 			column="lkm_cust_id"  />
 
