@@ -13,18 +13,42 @@ import org.junit.Test;
  */
 public class PageBean<T> {
 	private Integer totalPage;// 总页数
-	private String currentPage;// 当前页
+	private Integer currentPage;// 当前页
 	private Integer totalSize;// 总记录数
 	private Integer pageSize;// 每页记录数
-	private List<T> datas;// 当前页记录
+	private List<T> datas;// 锁查询出来的记录
+	private String url;//这是比如筛选的话，里面的条件
+	
+
+	/**
+	 * 返回总页数
+	 */
+	public int getTotalPage() {
+		//总记录数 除以 每页记录数
+		int totalPage = totalSize / pageSize;
+		//如果正好能够整除，则总页数为总页数tp,否则为tp+1
+		return totalSize % pageSize == 0 ? totalPage : totalPage + 1;
+	}
+
+	/**
+	 * 返回当前页首行的下标
+	 */
+	public int getIndex(){
+		return (currentPage-1)*currentPage;
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	public Integer getPageSize() {
 		return pageSize;
 	}
 
-	public Integer getTotalPage() {
-		return totalPage;
-	}
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
@@ -42,11 +66,11 @@ public class PageBean<T> {
 		this.totalPage = totalPage;
 	}
 
-	public String getCurrentPage() {
+	public Integer getCurrentPage() {
 		return currentPage;
 	}
 
-	public void setCurrentPage(String currentPage) {
+	public void setCurrentPage(Integer currentPage) {
 		this.currentPage = currentPage;
 	}
 

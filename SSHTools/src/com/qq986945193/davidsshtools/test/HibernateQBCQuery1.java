@@ -190,9 +190,9 @@ public class HibernateQBCQuery1 {
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		//创建Criteria接口
-		Criteria criteria = session.createCriteria(Customer.class);
+		Criteria criteria = session.createCriteria(Linkman.class);
 		//设置聚合函数的方式,求数量
-		List<Number> listNumbers = criteria.setProjection(Projections.count("cust_id")).list();
+		List<Number> listNumbers = criteria.setProjection(Projections.count("lkm_id")).list();
 		Long count = listNumbers.get(0).longValue();
 		System.out.println(count);
 		transaction.commit();

@@ -46,23 +46,60 @@ public class LinkmanService {
 
 	/**
 	 * 查询所有联系人
-	 * @param detachedCriteria 
+	 * 
+	 * @param detachedCriteria
 	 * 
 	 * @return
 	 */
-	public List<Linkman> findAll(DetachedCriteria detachedCriteria) {
+	public List<Linkman> findAllByDetachedCriteria(DetachedCriteria detachedCriteria) {
 		// 开启事务，然后调用持久层的代码，最后提交事务
 		Session session = HibernateUtils.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {
 			// 根据ID查询到客户，然后将客户设置到联系人
-			List<Linkman> lists = linkmanDao.findAll(detachedCriteria);
+			List<Linkman> lists = linkmanDao.findAllByDetachedCriteria(detachedCriteria);
 			transaction.commit();
 			return lists;
 		} catch (Exception e) {
 			transaction.rollback();
 			return null;
 		}
+	}
+
+	/*
+	 * 查询所有联系人
+	 */
+	public List<Linkman> findAll(String formName, int currentPage, int pageSize) {
+		// 开启事务，然后调用持久层的代码，最后提交事务
+		Session session = HibernateUtils.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			List<Linkman> listsLinkmans = linkmanDao.findAll(formName,currentPage,pageSize);
+			transaction.commit();
+			return listsLinkmans;
+		} catch (Exception e) {
+			transaction.rollback();
+			return null;
+		}
+	}
+
+	/**
+	 * 查询出总记录数 formName 用户输入的信息
+	 */
+	public int pageCountQuery(String formName) {
+		// 开启事务，然后调用持久层的代码，最后提交事务
+		Session session = HibernateUtils.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		int totalSize = 0;
+		try {
+			totalSize = linkmanDao.pageCountQuery(formName);
+			transaction.commit();
+			return totalSize;
+		} catch (Exception e) {
+			transaction.rollback();
+			return totalSize;
+		}
+
 	}
 
 }

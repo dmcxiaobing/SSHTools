@@ -2,8 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping >
-	<class name="com.qq986945193.davidsshtools.domain.HibernateCustomer"
-		table="cst_hibernate_customer" lazy="true">
+	<class name="com.qq986945193.davidsshtools.domain.HibernateCustomer" lazy="false"
+		table="cst_hibernate_customer" >
 		<id column="cust_id" name="cust_id">
 			<generator class="native" />
 		</id>
