@@ -83,7 +83,13 @@
 			</props>
 		</property>
 	</bean>
-	
+	<!-- SSH整合的配置 -->
+	<!-- 客户的管理，配置持久层.使用实现类进行配置 -->
+	<bean id="demoCustomerDao1" class="com.qq986945193.davidsshtools.dao.DemoCustomerDao1Impl"/>
+	<!-- 客户的管理，配置业务层。使用实现类配置 -->
+	<bean id="demoCustomerService1" class = "com.qq986945193.davidsshtools.service.DemoCustomerService1Impl">
+		<property name="customerDao" ref="demoCustomerDao1"/>
+	</bean>
 </beans>
 
 

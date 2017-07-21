@@ -14,8 +14,11 @@
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
+<%-- 	这个是使用以前的方法
 	<FORM id=form1 name=form1 action="${pageContext.request.contextPath }/servlet/SaveCustomerServlet" method="post">
-		
+ --%>
+<!-- 	这个是使用struts框架和spring结合 -->
+	<FORM id=form1 name=form1 action="${pageContext.request.contextPath }/customer_add.action" method="post">
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
 				<TR>
