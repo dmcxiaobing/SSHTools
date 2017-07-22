@@ -10,6 +10,11 @@ public class SpringPerson {
 		this.pname = pname;
 		this.car1 = car1;
 	}
+	
+	public SpringPerson() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "SpringPerson [pname=" + pname + ", car1=" + car1 + "]";

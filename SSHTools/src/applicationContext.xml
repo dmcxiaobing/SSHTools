@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+             <!-- 版本有些需要带有版本号 -->
+        <!-- http://www.springframework.org/schema/beans/spring-beans.xsd -->
 	<!-- 使用bean标签 ,id为唯一的标识，通过id获取。类名 -->
 	<bean id="userService"
 		class="com.qq986945193.davidsshtools.service.SpringUserServiceImpl">
