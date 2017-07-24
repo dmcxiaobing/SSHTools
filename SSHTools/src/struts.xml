@@ -63,6 +63,30 @@
 			<result name="error">/jsp/error.jsp</result>
 		</action>
 	</package>
+	
+	<!-- action的配置拦截器以及完全解耦的方式.使用通配符的方式进行配置 -->
+	<package name="introduceAction4" extends="struts-default" namespace="/">
+	
+			<!-- 配置全局的结果页面 全局的重定向-->
+		<!-- <global-results>
+			<result name="success" type="redirect">/struts2/jsps/success.jsp</result>
+		</global-results>
+		 -->
+		
+	
+		<!-- 完全解耦和测试Servlet原生api的方式 -->
+		<action name="introduce_*" class="com.qq986945193.davidsshtools.action.IntroduceAction4" method="{1}">
+			<!-- <result name="success">/struts2/jsps/success.jsp</result> -->
+		</action>
+		<!-- 演示重定向action.不用在写后缀 -->
+		<action name="introduceRedirect_*" class="com.qq986945193.davidsshtools.action.IntroduceAction4" method="{1}">
+			<!-- <result name="success" type="redirectAction">introduceRedirect_fun4</result> -->
+		</action>
+		<!-- 演示获取到表单的数据，然后进行封装-->
+		<action name="introduceformParameter_*" class="com.qq986945193.davidsshtools.action.IntroduceAction5" method="{1}">
+		</action>
+	</package>
+	
 </struts>
 
 

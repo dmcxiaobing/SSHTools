@@ -9,19 +9,19 @@
 		<filter-name>struts2</filter-name>	
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
-<!-- 	<filter-mapping>
+	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	</filter-mapping>
 	  <!-- 配置WEB整合的监听器 依赖。spring-web-4.2.4.RELEASE.jar -->
-  	<listener>
+  <!-- 	<listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
  	 </listener>
- 	 <!-- 加载方式：默认只能加载WEB-INF目录下的配置文件，提供配置方式，加载src目录下 -->
+ 	 加载方式：默认只能加载WEB-INF目录下的配置文件，提供配置方式，加载src目录下
   	<context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>classpath:applicationContext.xml</param-value>
-  </context-param>
+  	</context-param> -->
   
 	
 	
