@@ -1,6 +1,6 @@
-package com.qq986945193.davidsshtools.service;
+package com.qq986945193.davidsshtools.service.impl;
 
-import com.qq986945193.davidsshtools.dao.SpringCustomerDaoImpl;
+import com.qq986945193.davidsshtools.dao.impl.SpringCustomerDaoImpl;
 
 /**
  * spring day1 一个业务层实现类。需要接口这里省略了

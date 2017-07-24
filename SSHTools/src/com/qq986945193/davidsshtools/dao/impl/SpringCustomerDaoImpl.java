@@ -1,4 +1,4 @@
-package com.qq986945193.davidsshtools.dao;
+package com.qq986945193.davidsshtools.dao.impl;
 /**
  * spring day1 一个持久层实现类。需要接口这里省略了
  *

@@ -1,4 +1,6 @@
-package com.qq986945193.davidsshtools.service;
+package com.qq986945193.davidsshtools.service.impl;
+
+import com.qq986945193.davidsshtools.service.SpringUserService;
 
 /**
  * uservice的实现类

@@ -1,5 +1,9 @@
 package com.qq986945193.davidsshtools.test;
-
+/**
+ * @Author ：程序员小冰
+ * @新浪微博 ：http://weibo.com/mcxiaobing
+ * @GitHub: https://github.com/QQ986945193
+ */
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -11,9 +15,9 @@ import com.qq986945193.davidsshtools.domain.SpringCar1;
 import com.qq986945193.davidsshtools.domain.SpringCar2;
 import com.qq986945193.davidsshtools.domain.SpringPerson;
 import com.qq986945193.davidsshtools.domain.SpringUser1;
-import com.qq986945193.davidsshtools.service.SpringCustomerServiceImpl;
 import com.qq986945193.davidsshtools.service.SpringUserService;
-import com.qq986945193.davidsshtools.service.SpringUserServiceImpl;
+import com.qq986945193.davidsshtools.service.impl.SpringCustomerServiceImpl;
+import com.qq986945193.davidsshtools.service.impl.SpringUserServiceImpl;
 
 /**
  * 测试IOC的程序

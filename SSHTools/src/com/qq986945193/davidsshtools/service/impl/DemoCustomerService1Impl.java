@@ -1,10 +1,11 @@
-package com.qq986945193.davidsshtools.service;
+package com.qq986945193.davidsshtools.service.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.qq986945193.davidsshtools.dao.DemoCustomerDao1;
 import com.qq986945193.davidsshtools.domain.Customer;
+import com.qq986945193.davidsshtools.service.DemoCustomerService1;
 import com.qq986945193.davidsshtools.utils.HibernateUtils;
 
 /**
