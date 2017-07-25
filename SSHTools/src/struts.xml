@@ -49,31 +49,42 @@
 	</package>
 
 	<!-- 配置ssh项目的整合action -->
-	<package name="sshtools" namespace="/" extends="struts-default">
-		<!-- 登陆的action。使用通配符的方式配置 -->
+	<!-- <package name="sshtools" namespace="/" extends="struts-default">
+		登陆的action。使用通配符的方式配置
 		<action name="user_*" class="com.qq986945193.davidsshtools.action.UserAction"
 			method="{1}">
 			<result name="success">/index.htm</result>
 			<result name="login">/login.htm</result>
 		</action>
-		<!-- 配置添加客户的action。通配符配置 -->
+		配置添加客户的action。通配符配置
 		<action name="customer_*" class="com.qq986945193.davidsshtools.action.DemoCustomerAction1" method="{1}">
-			<!-- 配置返回结果 -->
+			配置返回结果
 			<result name="success">/jsp/success.jsp</result>
 			<result name="error">/jsp/error.jsp</result>
 		</action>
-	</package>
+	</package> -->
 	
 	<!-- action的配置拦截器以及完全解耦的方式.使用通配符的方式进行配置 -->
 	<package name="introduceAction4" extends="struts-default" namespace="/">
-	
 			<!-- 配置全局的结果页面 全局的重定向-->
 		<!-- <global-results>
 			<result name="success" type="redirect">/struts2/jsps/success.jsp</result>
 		</global-results>
 		 -->
-		
-	
+				
+		<!-- 定义了一个拦截器。这是第一种方式 -->
+		<!-- <interceptors>
+			<interceptor name="IntroduceInterceptor1" class="com.qq986945193.davidsshtools.interceptor.IntroduceInterceptor1"/>
+		</interceptors> -->
+		<!-- 第二种方法，我们可以定义拦截器栈 -->
+		<interceptors>
+			<interceptor name="IntroduceInterceptor1" class="com.qq986945193.davidsshtools.interceptor.IntroduceInterceptor1"/>
+			<!-- 定义一个拦截器栈 -->
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="IntroduceInterceptor1"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
 		<!-- 完全解耦和测试Servlet原生api的方式 -->
 		<action name="introduce_*" class="com.qq986945193.davidsshtools.action.IntroduceAction4" method="{1}">
 			<!-- <result name="success">/struts2/jsps/success.jsp</result> -->
@@ -84,6 +95,53 @@
 		</action>
 		<!-- 演示获取到表单的数据，然后进行封装-->
 		<action name="introduceformParameter_*" class="com.qq986945193.davidsshtools.action.IntroduceAction5" method="{1}">
+		</action>
+
+		<!-- 配置拦截器。这里访问是根据name，http://localhost/SSHTools/interceptorAction1.action 方法是内部调用的 -->
+		<action name="interceptorAction1" class="com.qq986945193.davidsshtools.action.InterceptorAction1" method="testInterceptor">
+			<!-- 引入我们自己的拦截器。由于引入了我们自己的拦截器，所以默认栈的拦截器就不起作用了。所以，我们要手动导入默认拦截器 -->
+	<!-- 		<interceptor-ref name="IntroduceInterceptor1"></interceptor-ref> -->
+			<!-- <interceptor-ref name="defaultStack"></interceptor-ref> -->
+			<!-- 我们可以直接引入一个拦截器栈 -->
+			<interceptor-ref name="myStack"/>
+		</action>
+	</package>
+	<!-- 这是一个检测是否登陆的拦截器功能 interceptor-->
+	<package name="loginInterceptor" extends="struts-default" namespace="/">
+		<!-- 配置拦截器栈 -->
+		<!-- <interceptors>
+			<interceptor name="customerUserInterceptor1" class="com.qq986945193.davidsshtools.interceptor.CustomerUserInterceptor1"/>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="customerUserInterceptor1"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors> -->
+			<!-- 配置拦截器 -->
+		<interceptors>
+			<interceptor name="userInterceptor" class="com.qq986945193.davidsshtools.interceptor.CustomerUserInterceptor1"/>
+		</interceptors>
+		<!-- 配置全局的login -->
+		<global-results>
+			<result name="login">/struts2/demo/login.htm</result>
+		</global-results>
+		<!-- 配置用户的模块 -->
+		<action name="user_*" class="com.qq986945193.davidsshtools.action.UserAction" method="{1}">
+			<!-- 如果返回success 则说明登陆成功 -->
+			<result name="success">/struts2/demo/index.htm</result>
+			<!-- 由于拦截器进行了拦截，所以login方法不能拦截，不然全部永远也登录不上去了 -->
+			<interceptor-ref name="userInterceptor">
+				<!-- login方法不拦截 -->
+				<param name="excludeMethods">login</param>
+			</interceptor-ref>
+			<!-- 开启默认的拦截 -->
+			<interceptor-ref name="defaultStack"/>
+		</action>
+		
+		<!-- 客户的模块 -->
+		<action name="customer_*" class = "com.qq986945193.davidsshtools.action.CustomerAction1" method="{1}">
+			<!-- 引入拦截器 -->
+			<interceptor-ref name="userInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 	</package>
 	

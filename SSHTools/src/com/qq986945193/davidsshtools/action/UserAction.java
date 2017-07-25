@@ -22,7 +22,7 @@ public class UserAction extends ActionSupport {
 	 * 登陆的处理
 	 */
 	public String login(){
-		System.out.println("没进来吗？");
+		System.out.println("jinlaile");
 		//得到HttpServletRequest对象
 		HttpServletRequest request = ServletActionContext.getRequest();
 		//获取请求参数

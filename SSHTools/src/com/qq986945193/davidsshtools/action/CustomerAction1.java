@@ -6,6 +6,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
+ * 
+ * 演示拦截器，登陆的功能
  */
 public class CustomerAction1 extends ActionSupport {
 	

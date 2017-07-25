@@ -1,22 +1,26 @@
 package com.qq986945193.davidsshtools.action;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.ui.Model;
 import com.qq986945193.davidsshtools.domain.SpringUser2;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+
 /**
- * 关于获取到表单数据，封装数据的教程  对应的jspIntroduceActionForm.jsp
+ * 关于获取到表单数据，封装数据的教程 对应的jspIntroduceActionForm.jsp
+ * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
  * 
- * 属性驱动和模型驱动封装表单数据。
- * 实现ModelDriven接口 必须手动实例化对象
+ *          属性驱动和模型驱动封装表单数据。 实现ModelDriven接口 必须手动实例化对象
  */
 
-
-public class IntroduceAction5 extends ActionSupport implements ModelDriven<SpringUser2>{
+public class IntroduceAction5 extends ActionSupport implements ModelDriven<SpringUser2> {
 
 	private String username;
 	private String password;
@@ -54,7 +58,7 @@ public class IntroduceAction5 extends ActionSupport implements ModelDriven<Sprin
 		return NONE;
 	}
 
-/**************************************************************************/
+	/**************************************************************************/
 	private SpringUser2 user2;
 
 	public SpringUser2 getUser2() {
@@ -68,17 +72,18 @@ public class IntroduceAction5 extends ActionSupport implements ModelDriven<Sprin
 	/**
 	 * 利用属性驱动的方式，现在要提供get和set方法
 	 */
-	public String fun2(){
+	public String fun2() {
 		System.out.println(user2);
 		return NONE;
 	}
-/**************************************************************************/
+
+	/**************************************************************************/
 	/**
-	 * 模型驱动的方式。实现ModelDriven接口。
-	 * 必须手动实例化对象，
+	 * 模型驱动的方式。实现ModelDriven接口。 必须手动实例化对象，
 	 */
-	//手动实例化
+	// 手动实例化
 	private SpringUser2 springUser1 = new SpringUser2();
+
 	/**
 	 * 获取到模型对象
 	 */
@@ -86,33 +91,55 @@ public class IntroduceAction5 extends ActionSupport implements ModelDriven<Sprin
 	public SpringUser2 getModel() {
 		return springUser1;
 	}
-	
+
 	/**
 	 * 获取到模型对象
+	 * 
 	 * @return
 	 */
-	public String fun3(){
-		System.out.println(springUser1);
+	public String fun3() {
+		System.out.println("模型驱动：" + springUser1);
 		return NONE;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
+	/**************************************************************************/
+	private List<SpringUser2> list = new ArrayList<SpringUser2>();
+
+	public List<SpringUser2> getList() {
+		return list;
+	}
+
+	public void setList(List<SpringUser2> list) {
+		this.list = list;
+	}
+
+	/**
+	 * 属性驱动的方式，把数据封装到List集合中
+	 */
+	public String fun4() {
+		for (SpringUser2 springUser2 : list) {
+			System.out.println("list:" + springUser2);
+		}
+		return NONE;
+	}
+
+/**************************************************************************/
+	private Map<String, SpringUser2> map;
+
+	public Map<String, SpringUser2> getMap() {
+		return map;
+	}
+
+	public void setMap(Map<String, SpringUser2> map) {
+		this.map = map;
+	}
+
+	/**
+	 * 属性驱动的方式，把数据封装到Map集合中
+	 */
+	public String fun5() {
+		System.out.println(map);
+		return NONE;
+	}
+
 }

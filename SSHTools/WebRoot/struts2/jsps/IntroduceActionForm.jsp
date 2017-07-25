@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <h3>向List集合封装数据（默认情况下，采用是属性驱动的方式）</h3>
 <!-- 后台：List<User> list -->
-<form action="${ pageContext.request.contextPath }/regist4.action" method="post">
+<form action="${ pageContext.request.contextPath }/introduceformParameter_fun4.action" method="post">
 	姓名:<input type="text" name="list[0].username" /><br/>
 	密码:<input type="password" name="list[0].password" /><br/>
 	年龄:<input type="password" name="list[0].age" /><br/>
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </form>
 
 <h3>向Map集合封装数据（默认情况下，采用是属性驱动的方式）</h3>
-<form action="${ pageContext.request.contextPath }/regist5.action" method="post">
+<form action="${ pageContext.request.contextPath }/introduceformParameter_fun5.action" method="post">
 	姓名:<input type="text" name="map['one'].username" /><br/>
 	密码:<input type="password" name="map['one'].password" /><br/>
 	年龄:<input type="password" name="map['one'].age" /><br/>
