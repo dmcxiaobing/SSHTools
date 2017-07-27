@@ -16,18 +16,21 @@ import com.qq986945193.davidsshtools.dao.SpringUserDao2;
  * @GitHub: https://github.com/QQ986945193
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:springApplicationContext.xml")
+@ContextConfiguration("classpath:springApplicationContext3.xml")
+//这个是检测xml配置@ContextConfiguration("classpath:springApplicationContext.xml")
 public class SpringAopTest2 {
 
 	//利用注解的方式进行注入
 	@Resource(name = "userDao")
 	private SpringUserDao2 userDao;
-	
+
 	/**
 	 * 测试aop的功能
 	 */
 	@Test
 	public void fun1(){
-		userDao.save();
+	//userDao = new SpringUserDaoImpl2();
+	userDao.save();
+	userDao.update();
 	}
 }

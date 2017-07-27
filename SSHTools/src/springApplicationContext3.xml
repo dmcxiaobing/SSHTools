@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 版本有些需要带有版本号 -->
+	<!-- http://www.springframework.org/schema/beans/spring-beans.xsd -->
+	
+	<!-- 使用注解，先开启我们的自动代理功能 -->
+	<aop:aspectj-autoproxy/>
+	
+	<!-- 这是一个利用注解检测aop的功能介绍 -->
+	<!-- 首先配置我们的userDao -->
+	<bean id="userDao" class="com.qq986945193.davidsshtools.dao.impl.SpringUserDaoImpl2"/>
+	<!-- 编写切面类，并进行配置 -->
+	<bean id = "aspectAnnoUtils" class="com.qq986945193.davidsshtools.utils.AspectAnnoUtils"/>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
