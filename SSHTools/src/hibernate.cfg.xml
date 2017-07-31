@@ -31,6 +31,8 @@
 		<mapping resource="com/qq986945193/davidsshtools/domain/UserActionBean.hbm.xml" />
 		<mapping resource="com/qq986945193/davidsshtools/domain/HibernateUser.hbm.xml" />
 		<mapping resource="com/qq986945193/davidsshtools/domain/HibernateRole.hbm.xml" />
+		<!-- 映射配置javabean,基于annotation的配置 -->
+		<mapping class="com.qq986945193.davidsshtools.domain.HibernateAnnotationUser"/>
 	</session-factory>
 
 </hibernate-configuration>
