@@ -10,5 +10,14 @@ public interface SpringJdbcAccountService1 {
 	/**
 	 * 转账
 	 */
-	public void pay();
+	public void pay(String string, String string2, int i);
+
+	/**
+	 * 直接xml中管理事务，配置AOP
+	 */
+	public void pay2(String string, String string2, int i);
+	/**
+	 * 使用注解进行管理事务
+	 */
+	public void pay3(String string, String string2, int i);
 }

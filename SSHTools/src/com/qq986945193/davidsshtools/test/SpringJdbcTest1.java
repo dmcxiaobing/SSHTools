@@ -18,7 +18,7 @@ import com.qq986945193.davidsshtools.constants.Api;
 import com.qq986945193.davidsshtools.domain.SpringJdbcAccouont;
 
 /**
- * 测试jdbc的模板类。
+ * 测试jdbc的模板类。没有事务 管理
  * 
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
