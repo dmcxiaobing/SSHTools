@@ -2,7 +2,11 @@ package com.qq986945193.davidsshtools.domain;
 
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * @Author ：程序员小冰
+ * @新浪微博 ：http://weibo.com/mcxiaobing
+ * @GitHub: https://github.com/QQ986945193
+ */
 /**
  * 一个javabean 客户 和数据库表字段对应
  */
