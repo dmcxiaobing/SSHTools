@@ -143,6 +143,15 @@
 			<interceptor-ref name="userInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
 		</action>
+		
+		<!-- 演示值栈的功能，数据存取 -->
+		<action name="vs_*" class = "com.qq986945193.davidsshtools.action.ValueStackAction" method="{1}">
+		<!-- 引入拦截器 -->
+			<interceptor-ref name="userInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="ognlsuccess">/jsp/ognlsuccess.jsp</result>
+			</action>
+			
 	</package>
 	
 </struts>

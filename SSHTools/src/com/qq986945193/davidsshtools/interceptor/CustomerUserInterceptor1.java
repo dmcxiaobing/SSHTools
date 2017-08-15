@@ -15,10 +15,16 @@ import com.qq986945193.davidsshtools.domain.UserActionBean;
  */
 public class CustomerUserInterceptor1 extends MethodFilterInterceptor {
 
+	@Override
+	protected String doIntercept(ActionInvocation arg0) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * 继承这个类，只拦截action的方法.是否登录，如果登陆了则不拦截，否则拦截。
 	 */
-	@Override
+/*	@Override
 	protected String doIntercept(ActionInvocation invocation) throws Exception {
 		System.out.println("Lanjile");
 		//查看session中是否存在user对象
@@ -30,6 +36,6 @@ public class CustomerUserInterceptor1 extends MethodFilterInterceptor {
 		}
 		//如果登陆了，则直接放行。
 		return invocation.invoke();
-	}
+	}*/
 
 }
