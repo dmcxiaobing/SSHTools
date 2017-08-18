@@ -2,6 +2,7 @@ package com.qq986945193.davidsshtools.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -51,8 +52,8 @@ public class CustomerDao {
 			createCriteria.add(Restrictions.like("cust_name", "%" + custNameValue + "%"));
 		}
 		//如果pageSize 为null,则默认为10
-		int pagesize = 0;
-		if (pageSize == null) {
+		int pagesize = 1;
+		if (pageSize == null||StringUtils.isEmpty(pageSize)) {
 			pagesize = 10;
 		}else {
 			pagesize = Integer.parseInt(pageSize);
@@ -125,8 +126,9 @@ public class CustomerDao {
 	 * 得到总页数
 	 */
 	public Integer findTotalPage(String pageSize) {
-		int p = 0;
-		if (pageSize == null) {
+		//pageSize 每页记录数
+		int p = 1;
+		if (pageSize == null||StringUtils.isEmpty(pageSize)||pageSize.trim().equals("")) {
 			p = 10;
 		}
 		return getTotalPage(findTotalSize(), p);
