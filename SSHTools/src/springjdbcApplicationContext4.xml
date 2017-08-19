@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 配置c3p0的连接池 -->
+	<bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql:///exam"/>
+		<property name="user" value="root"/>
+		<property name="password" value="1234"/>
+	</bean>
+	
+	<!-- 配置平台事务管理器 -->
+	<bean id="transactionManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 声明式事务（采用xml配置文件的方式） -->
+	<!-- 先配置通知 -->
+	<tx:advice id="myAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 给方法设置数据库属性（隔离级别，传播行为） -->
+			<tx:method name="pay2" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	<!-- 配置AOP,如果是自己编写的aop,aop:aspect配置，使用的是Spring框架提供的通知 -aop:advisor！-->
+	<aop:config>
+		<aop:advisor advice-ref="myAdvice" pointcut="execution(public * com.qq986945193.davidsshtools.service.impl.SpringJdbcAccountServiceImpl1.pay2(..))"/>
+	</aop:config>
+	<!-- 配置业务层和持久层 -->
+	<bean id = "accountDao" class = "com.qq986945193.davidsshtools.dao.impl.SpringJdbcAccountDaoImpl1">
+		<!-- 因为操作事务，需要使用dataSoure -->
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	
+	<bean id="accountService" class = "com.qq986945193.davidsshtools.service.impl.SpringJdbcAccountServiceImpl1">
+		<property name="accountDao" ref="accountDao"/>
+	</bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

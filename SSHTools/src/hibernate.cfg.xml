@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<!-- 记住：先配置SessionFactory标签，一个数据库对应一个SessionFactory标签 -->
+	<session-factory>
+		<!-- 必须配置的参数有5个，4大参数，数据库的方言 加载类，url,用户名和密码 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///sshtools</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">1234</property>
+		<!-- 数据库的方言 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- 可选配置 -->
+		<!-- 显示SQL语句，在控制台显示 -->
+		<property name="hibernate.show_sql">false</property>
+		<!-- 格式化SQL语句 -->
+		<property name="hibernate.format_sql">false</property>
+		<!-- 生成数据库的表结构 update:如果没有表结构，则创建表结构。如果存在，不会创建，添加数据 -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- 设置数据库的隔离级别，就使用默认值就OK <property name="hibernate.connection.isolation">4</property> -->
+		<!-- 开启绑定本地的session -->
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<!-- 映射配置文件，需要引入映射的配置文件 -->
+		<mapping resource="com/qq986945193/davidsshtools/domain/Customer.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/User.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/HibernateCustomer.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/Linkman.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/UserActionBean.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/HibernateUser.hbm.xml" />
+		<mapping resource="com/qq986945193/davidsshtools/domain/HibernateRole.hbm.xml" />
+		<!-- 映射配置javabean,基于annotation的配置 -->
+		<mapping class="com.qq986945193.davidsshtools.domain.HibernateAnnotationUser"/>
+	</session-factory>
+
+</hibernate-configuration>

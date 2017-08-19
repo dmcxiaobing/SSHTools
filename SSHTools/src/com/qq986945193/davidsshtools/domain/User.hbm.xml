@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "com.qq986945193.davidsshtools.domain.User" table = "cst_user">
+		<!-- 配置id,
+			name属性，javaBean的属性
+			column属性，是数据库表结构的字段名
+		 -->
+		<id name = "id" column = "uid">
+			<!-- 主键的生成策略  使用hibernate框架 -->
+			<generator class="native"/>
+		</id>	
+		<!-- 配置其他的属性 -->
+		<property name="name" column = "name"/>
+		<property name="age" column = "age"/>
+	</class>    
+    
+</hibernate-mapping>
