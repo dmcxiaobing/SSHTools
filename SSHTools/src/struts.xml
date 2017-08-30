@@ -6,8 +6,8 @@
 	<!-- 编写常量 这个访问后缀名可以更改 <constant name="struts.action.extension" value="do,,"></constant> -->
 	<!-- 开启动态方法访问 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
-	<!-- 引入其他的配置文件 -->
-	<include file="com/qq986945193/davidsshtools/domain/struts_david.xml" />
+	<!-- 引入其他的配置文件 。。-->
+	<!-- <include file="com/qq986945193/davidsshtools/domain/struts_david.xml" /> -->
 
 
 	<!-- 包结构 name 是包名称。 namespace访问路径。extends继承 -->
